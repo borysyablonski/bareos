@@ -108,7 +108,6 @@ class BucketExplorer(ProcessBase):
                 )
 
                 self.queue_try_put(self.discovered_objects_queue, job)
-        
+
         except Exception as exception:
             self.worker_exception("Error while iterating objects", exception)
-               

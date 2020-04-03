@@ -29,7 +29,7 @@ class Worker(ProcessBase):
         if self.driver == None:
             self.error_message("Could not load driver")
             return
-        
+
         finish = False
         while not finish:
             finish = self.__iterate_input_queue()
@@ -39,7 +39,7 @@ class Worker(ProcessBase):
             if self.shutdown_event.is_set():
                 return True
             job = self.input_queue.get()
-            if job == None: #poison pill
+            if job == None:  # poison pill
                 return True
             if not self.__run_job(job):
                 return True
@@ -84,6 +84,6 @@ class Worker(ProcessBase):
                 self.worker_exception("Error using temporary file", e)
 
         self.queue_try_put(self.output_queue, job)
-        
-        #success
+
+        # success
         return True

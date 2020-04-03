@@ -34,9 +34,9 @@ class BareosLibcloudApi(object):
         self.tmp_dir_path = tmp_dir_path
         self.count_worker_ready = 0
         self.count_bucket_explorer_ready = 0
-        
+
         self.number_of_worker = options["nb_worker"] if options["nb_worker"] > 0 else 1
-       
+
         queue_size = options["queue_size"] if options["queue_size"] > 0 else 1000
         self.discovered_objects_queue = Queue(queue_size)
         self.downloaded_objects_queue = Queue(queue_size)
@@ -71,7 +71,7 @@ class BareosLibcloudApi(object):
 
     def worker_ready(self):
         return self.count_worker_ready == self.number_of_worker
-    
+
     def bucket_explorer_ready(self):
         return self.count_bucket_explorer_ready == 1
 
@@ -137,7 +137,7 @@ class BareosLibcloudApi(object):
 
         if self.bucket_explorer.is_alive():
             self.bucket_explorer.terminate()
-        
+
         try:
             self.__remove_tmp_dir()
         except:
@@ -166,4 +166,3 @@ class BareosLibcloudApi(object):
             self.__remove_tmp_dir()
         except:
             pass
-

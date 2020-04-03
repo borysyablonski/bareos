@@ -7,6 +7,7 @@ from bareos_libcloud_api.queue_message import WorkerException
 from bareos_libcloud_api.queue_message import MESSAGE_TYPE
 import Queue as Q
 
+
 class ProcessBase(Process):
     def __init__(
         self, worker_id, message_queue,
@@ -23,7 +24,7 @@ class ProcessBase(Process):
         self.run_process()
         self.ready_message()
         self.wait_for_shutdown()
-        
+
     def shutdown(self):
         self.shutdown_event.set()
 
@@ -41,7 +42,7 @@ class ProcessBase(Process):
 
     def worker_exception(self, message, exception):
         self.message_queue.put(WorkerException(self.worker_id, message, exception))
-    
+
     def queue_try_put(self, queue, obj):
         while not self.shutdown_event.is_set():
             try:
